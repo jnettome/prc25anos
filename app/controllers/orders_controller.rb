@@ -15,16 +15,12 @@ class OrdersController < ApplicationController
 
   # POST /orders/notify
   def notify
-    @notification = PagseguroClient::Notification.retrieve(params[:notificationCode])
+    @transaction = PagseguroClient::Notification.retrieve(params[:notificationCode])
 
-    @order = Order.find(@notification.order_id)
-
-    qr_code_img = RQRCode::QRCode.new(@notification.code, :size => 4, :level => :h ).to_img
-
+    @order = Order.find(@transaction.order_id)
     @order.order_notifications.create!(
-      code: @notification.code, status: @notification.status, payment_method: @notification.payment_method,
-      client: "#{@notification.sender.name} - #{@notification.sender.email} (#{@notification.sender.phone.area_code} #{@notification.sender.phone.number})",
-      address: qr_code_img.to_string)
+      code: @transaction.code, status: @transaction.status, payment_method: @transaction.payment_method,
+      client: "#{@transaction.sender.name} - #{@transaction.sender.email} (#{@transaction.sender.phone.area_code} #{@transaction.sender.phone.number})")
 
     NotificationMailer.order_updated(@order.email, @order).deliver
 

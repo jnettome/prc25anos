@@ -4,7 +4,7 @@
   <p>Esse é o seu convite. Imprima-o e leve nos eventos para usufruir de seus benefícios.</p>
   <br>
 
-  <img src="<%= @order.order_notifications.last.address %>" alt="/">
+  <img src="https://chart.googleapis.com/chart?chs=350x350&cht=qr&chl=<%= url_for root_path + "/panel/#{@order.order_notifications.last.code}" %>&choe=UTF-8" alt="/">
 
   <br>
   <p>Para acessar seu painel, <a href="<%= url_for root_path %>/panel/<%= @order.order_notifications.last.code %>">clique aqui</a>.</p>
