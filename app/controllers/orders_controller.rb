@@ -20,7 +20,7 @@ class OrdersController < ApplicationController
     @order = Order.find(@transaction.order_id)
     @order.order_notifications.create!(
       code: @transaction.code, status: @transaction.status, payment_method: @transaction.payment_method,
-      client: "#{@transaction.sender.name} - #{@transaction.sender.email} (#{@transaction.sender.phone.area_code} #{@transaction.sender.phone.number})")
+      client: "#{@transaction.sender[:name]} - #{@transaction.sender[:email]}")
 
     NotificationMailer.order_updated(@order.email, @order).deliver
 
