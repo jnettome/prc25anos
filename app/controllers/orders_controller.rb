@@ -20,7 +20,7 @@ class OrdersController < ApplicationController
     @order = Order.find(@notification.order_id)
     @order.order_notifications.create!(
       code: @notification.code.to_s, status: @notification.status.to_s, payment_method: @notification.payment_method.to_s,
-      client: @notification.client.to_s, address: @notification.address.to_s)
+      client: @notification.client.to_s)
 
     NotificationMailer.order_updated(@order.email, @order).deliver
 
