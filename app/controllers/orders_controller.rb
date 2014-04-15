@@ -18,9 +18,10 @@ class OrdersController < ApplicationController
     @notification = PagseguroClient::Notification.retrieve(params[:notificationCode])
 
     @order = Order.find(@notification.order_id)
+    puts @notification.inspect
     @order.order_notifications.create!(
       code: @notification.code.to_s, status: @notification.status.to_s, payment_method: @notification.payment_method.to_s,
-      client: @notification.client.to_s)
+      client: @notification.sender.to_s)
 
     NotificationMailer.order_updated(@order.email, @order).deliver
 
