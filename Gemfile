@@ -29,7 +29,7 @@ gem 'unicorn'
 # Use debugger
 gem 'better_errors', group: [:development, :test]
 gem 'binding_of_caller', group: [:development, :test]
-gem 'pry-rails', group: [:development, :test]
+gem 'pry-meta', group: [:development, :test]
 
 # Use rspec
 gem 'rspec-rails', group: [:development, :test]

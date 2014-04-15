@@ -1,9 +1,9 @@
 development: &development
-  ws_url: "http://localhost:3000"
-  ps_url: "http://localhost:3000"
-  return_to: "http://localhost:3000/obrigado"
+  ws_url: "https://ws.pagseguro.uol.com.br"
+  ps_url: "https://pagseguro.uol.com.br"
+  return_to: "http://prc25anos.herokuapp.com/obrigado"
   email: hi@joaonetto.me
-  token: "tokenGeradoPeloPagseguro"
+  token: "ABBDBF3012E5491794C55810002C491A"
 
 test:
   <<: *development
@@ -13,4 +13,4 @@ production:
   ps_url: "https://pagseguro.uol.com.br"
   return_to: "http://prc25anos.herokuapp.com/obrigado"
   email: hi@joaonetto.ms
-  token: "tokenGeradoPeloPagseguro"
+  token: "ABBDBF3012E5491794C55810002C491A"
