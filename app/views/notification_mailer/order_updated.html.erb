@@ -4,10 +4,10 @@
   <p>Esse é o seu convite. Imprima-o e leve nos eventos para usufruir de seus benefícios.</p>
   <br>
 
-  <img src="https://chart.googleapis.com/chart?chs=350x350&cht=qr&chl=<%= url_for root_path + "/panel/#{@order.order_notifications.last.code}" %>&choe=UTF-8" alt="/">
+  <img src="https://chart.googleapis.com/chart?chs=350x350&cht=qr&chl=<%= url_for root_url + "panel/#{@order.order_notifications.last.code}" %>&choe=UTF-8" alt="/">
 
   <br>
-  <p>Para acessar seu painel, <a href="<%= url_for root_path %>/panel/<%= @order.order_notifications.last.code %>">clique aqui</a>.</p>
+  <p>Para acessar seu painel, <a href="<%= url_for root_url %>panel/<%= @order.order_notifications.last.code %>">clique aqui</a>.</p>
 <% end %>
 
 
@@ -21,7 +21,7 @@
     <th>Dados do Cliente</th>
   </thead>
   <tbody>
-    <%= @order.order_notifications.each do |notification| %>
+    <% @order.order_notifications.each do |notification| %>
     <tr>
       <td><%= notification.code %></td>
       <td><%= notification.status %></td>
