@@ -36,3 +36,5 @@ gem 'pry-meta', group: [:development, :test]
 # Use rspec
 gem 'rspec-rails', group: [:development, :test]
 
+# QRCode
+gem 'rqrcode_png'

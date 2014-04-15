@@ -1,13 +1,33 @@
 <h1>Seu pedido foi atualizado!</h1>
 
-<p>
-  Seu pedido foi atualizado!
-</p>
+<% if @order.order_notifications.last.status == 'approved' %>
+  <p>Esse é o seu convite. Imprima-o e leve nos eventos para usufruir de seus benefícios.</p>
+  <br>
 
-<%= @order.order_notifications.each do |notification| %>
-<hr>
-<p><%= notification.code %></p>
-<p><%= notification.status %></p>
-<p><%= notification.payment_method %></p>
-<p><%= notification.client %></p>
+  <img src="<%= @order.order_notifications.last.address %>" alt="/">
+
+  <br>
+  <p>Para acessar seu painel, <a href="<%= url_for root_path %>/panel/<%= @order.order_notifications.last.code %>">clique aqui</a>.</p>
 <% end %>
+
+
+<h3>Últimas atualizações do pedido</h3>
+
+<table>
+  <thead>
+    <th>Código</th>
+    <th>Status</th>
+    <th>Forma de Pagamento</th>
+    <th>Dados do Cliente</th>
+  </thead>
+  <tbody>
+    <%= @order.order_notifications.each do |notification| %>
+    <tr>
+      <td><%= notification.code %></td>
+      <td><%= notification.status %></td>
+      <td><%= notification.payment_method %></td>
+      <td><%= notification.client %></td>
+    </tr>
+    <% end %>
+  </tbody>
+</table>
