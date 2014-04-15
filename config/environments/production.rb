@@ -91,5 +91,4 @@ Rails.application.configure do
     :domain => 'herokuapp.com',
   }
 
-  config.action_controller.default_url_options = {:host => "https://prc25anos.herokuapp.com"}
 end
