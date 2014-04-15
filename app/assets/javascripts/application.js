@@ -14,5 +14,4 @@
 //= require jquery_ujs
 //= require turbolinks
 //= require bootstrap
-//= require creditcardjs-v0.10.9.min
 //= require_tree .
