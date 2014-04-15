@@ -1,0 +1,32 @@
+<%= form_for(@order, :html => { :class => "form-horizontal" }) do |f| %>
+  <% if @order.errors.any? %>
+    <div class="alert alert-danger alert-dismissable">
+      <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+      <h4><%= pluralize(@order.errors.count, "erros") %>:</h4>
+
+      <ul>
+      <% @order.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="form-group">
+    <%= f.label :name, "Nome", :class => "col-sm-2 control-label" %>
+    <div class="col-sm-10">
+      <%= f.text_field :name, :class => "form-control" %>
+    </div>
+  </div>
+  <div class="form-group">
+    <%= f.label :email, "Email", :class => "col-sm-2 control-label" %>
+    <div class="col-sm-10">
+      <%= f.text_field :email, :class => "form-control" %>
+    </div>
+  </div>
+  <div class="form-group">
+    <div class="col-sm-offset-1 col-sm-10">
+      <%= f.submit "Pagar agora", :class => "btn btn-primary" %>
+    </div>
+  </div>
+<% end %>
