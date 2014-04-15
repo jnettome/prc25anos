@@ -18,7 +18,9 @@ class OrdersController < ApplicationController
     @notification = PagseguroClient::Notification.retrieve(params[:notificationCode])
 
     @order = Order.find(@notification.order_id)
-    @order.order_notifications.create!(@notification)
+    @order.order_notifications.create!(
+      code: @notification.code.to_s, status: @notification.status.to_s, payment_method: @notification.payment_method.to_s,
+      client: @notification.client.to_s, address: @notification.address.to_s)
 
     NotificationMailer.order_updated(@order.email, @order).deliver
 
@@ -40,10 +42,10 @@ class OrdersController < ApplicationController
   def create
     @order = Order.new(order_params)
 
-    NotificationMailer.order_created(@order.email, @order).deliver
-
     respond_to do |format|
       if @order.save
+        NotificationMailer.order_created(@order.email, @order).deliver
+
         format.html { redirect_to PagseguroClient::payment_url(@order.code) }
         format.json { render :show, status: :created, location: @order }
       else
