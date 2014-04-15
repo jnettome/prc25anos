@@ -1,0 +1,14 @@
+<h1>Seu pedido foi atualizado!</h1>
+
+<p>
+  Seu pedido foi atualizado!
+</p>
+
+<%= @order.order_notifications.each do |notification| %>
+<hr>
+<p><%= notification.code %></p>
+<p><%= notification.status %></p>
+<p><%= notification.payment_method %></p>
+<p><%= notification.client %></p>
+<p><%= notification.address %></p>
+<% end %>

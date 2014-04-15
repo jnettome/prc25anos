@@ -1,5 +1,6 @@
 class OrdersController < ApplicationController
   before_action :set_order, only: [:show, :edit, :update, :destroy]
+  skip_before_filter :verify_authenticity_token, only: :notify
 
   # GET /orders
   # GET /orders.json
@@ -12,12 +13,14 @@ class OrdersController < ApplicationController
   def show
   end
 
-  # No seu controller
+  # POST /orders/notify
   def notify
     @notification = PagseguroClient::Notification.retrieve(params[:notificationCode])
 
     @order = Order.find(@notification.order_id)
     @order.order_notifications.create!(@notification)
+
+    NotificationMailer.order_updated(@order.email, @order).deliver
 
     render nothing: true
   end
@@ -36,6 +39,8 @@ class OrdersController < ApplicationController
   # POST /orders.json
   def create
     @order = Order.new(order_params)
+
+    NotificationMailer.order_created(@order.email, @order).deliver
 
     respond_to do |format|
       if @order.save

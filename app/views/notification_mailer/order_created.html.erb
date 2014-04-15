@@ -1,0 +1,6 @@
+<h1>Seu pedido foi criado!</h1>
+
+<p>
+  <%= @order.name %>, seu pedido foi criado!<br/>
+  Caso não tenha conseguido efetuar o pagamento clique <a href="<%= PagseguroClient::payment_url(@order.code) %>">aqui</a> para ir ao Pagseguro.
+</p>
