@@ -1,8 +1,8 @@
 require "spec_helper"
 
-describe Notification do
+describe NotificationMailer do
   describe "order_created" do
-    let(:mail) { Notification.order_created }
+    let(:mail) { NotificationMailer.order_created }
 
     it "renders the headers" do
       mail.subject.should eq("Order created")
@@ -16,7 +16,7 @@ describe Notification do
   end
 
   describe "order_updated" do
-    let(:mail) { Notification.order_updated }
+    let(:mail) { NotificationMailer.order_updated }
 
     it "renders the headers" do
       mail.subject.should eq("Order updated")

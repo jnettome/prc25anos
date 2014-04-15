@@ -13,21 +13,6 @@ class OrdersController < ApplicationController
   def show
   end
 
-  # POST /orders/notify
-  def notify
-    @transaction = PagseguroClient::Notification.retrieve(params[:notificationCode])
-
-    @order = Order.find(@transaction.order_id)
-    @order.order_notifications.create!(
-      code: @transaction.code, status: @transaction.status, payment_method: @transaction.payment_method,
-      client: "#{@transaction.sender[:name]} - #{@transaction.sender[:email]}")
-
-    NotificationMailer.order_updated(@order.email, @order).deliver
-
-    render nothing: true
-  end
-
-
   # GET /orders/new
   def new
     @order = Order.new
@@ -44,9 +29,9 @@ class OrdersController < ApplicationController
 
     respond_to do |format|
       if @order.save
-        NotificationMailer.order_created(@order.email, @order).deliver
+        NotificationMailer.order_created(@order.email, @order).deliver unless @order.order_notifications.last.status != 'Autorizado'
 
-        format.html { redirect_to PagseguroClient::payment_url(@order.code) }
+        format.html { redirect_to '/obrigado' }
         format.json { render :show, status: :created, location: @order }
       else
         format.html { render :new }
