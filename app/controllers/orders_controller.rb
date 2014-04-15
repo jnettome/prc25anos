@@ -12,6 +12,17 @@ class OrdersController < ApplicationController
   def show
   end
 
+  # No seu controller
+  def notify
+    @notification = PagseguroClient::Notification.retrieve(params[:notificationCode])
+
+    @order = Order.find(@notification.order_id)
+    @order.order_notifications.create!(@notification)
+
+    render nothing: true
+  end
+
+
   # GET /orders/new
   def new
     @order = Order.new

@@ -2,6 +2,8 @@
 class Order < ActiveRecord::Base
   validates_presence_of :name, :email
 
+  has_many :order_notifications
+
   after_create :create_pagseguro_order
 
   def create_pagseguro_order
