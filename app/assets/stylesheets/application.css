@@ -12,6 +12,7 @@
  *
  *= require_tree .
  *= require_self
+ *= require creditcardjs-v0.10.9.min
  */
 
 /*
@@ -131,17 +132,6 @@ body {
   font-weight: bold;
 }
 
-
-/*
- * Footer
- */
-
-.mastfoot {
-  color: #999; /* IE8 proofing */
-  color: rgba(255,255,255,.5);
-}
-
-
 /*
  * Affix and center
  */
@@ -158,8 +148,9 @@ body {
   }
   /* Start the vertical centering */
   .site-wrapper-inner {
-    vertical-align: middle;
+    vertical-align: top; /* middle */
   }
+
   /* Handle the widths */
   .masthead,
   .mastfoot,
